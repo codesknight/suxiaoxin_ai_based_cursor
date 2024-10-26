@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI对话系统 - 苏小欣</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <button id="newChat" class="shadow-button">新建对话</button>
+            </div>
+            <div id="chatList">
+                <!-- 对话列表将通过JavaScript动态生成 -->
+            </div>
+        </aside>
+        <div id="sidebarResizer" class="resizer"></div>
+        <main id="chatMain">
+            <header>
+                <h1>苏小欣 AI对话系统</h1>
+            </header>
+            <section id="chatContent">
+                <!-- 对话内容将通过JavaScript动态生成,包括头像 -->
+            </section>
+            <div id="inputResizer" class="resizer"></div>
+            <footer>
+                <div id="inputArea">
+                    <textarea id="userInput" placeholder="输入消息..."></textarea>
+                    <button id="sendMessage" class="shadow-button">发送</button>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

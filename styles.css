@@ -1,0 +1,379 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    overflow: hidden; /* 防止整页滚动 */
+}
+
+.chat-container {
+    display: flex;
+    height: 100%;
+}
+
+#sidebar {
+    width: 260px;
+    background-color: #202123;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* 确保侧边栏占满整个高度 */
+}
+
+.sidebar-header {
+    padding: 10px;
+}
+
+#newChat {
+    width: 100%;
+    padding: 10px;
+    background-color: #343541;
+    color: white;
+    border: 1px solid #565869;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chatList {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: calc(100% - 60px); /* 减去新建对话按钮的高度 */
+}
+
+.chat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #565869;
+}
+
+.chat-item input {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 1rem;
+}
+
+.chat-item input:focus {
+    outline: none;
+    border-bottom: 1px solid #19C37D;
+}
+
+.chat-item .delete-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.chat-item .delete-btn:hover {
+    opacity: 1;
+}
+
+/* 如果需要,可以添加一个图标来代替"删除"文字 */
+/*
+.chat-item .delete-btn::after {
+    content: "×";
+    font-size: 1.2rem;
+}
+*/
+
+.chat-item:hover {
+    background-color: #2A2B32;
+}
+
+#chatMain {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #343541;
+    color: white;
+}
+
+#chatMain header {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #565869;
+}
+
+#chatContent {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.message .content {
+    flex-grow: 1;
+}
+
+.message.user {
+    background-color: #343541;
+}
+
+.message.user .avatar {
+    background-image: url('images/user.jpg'); /* 用户头像路径 */
+}
+
+.message.assistant {
+    background-color: #444654;
+}
+
+.message.assistant .avatar {
+    background-image: url('images/ai2.jpg'); /* AI头像路径 */
+}
+
+#inputArea {
+    display: flex;
+    padding: 10px;
+    background-color: #40414F;
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #40414F;
+    color: white;
+    resize: none;
+}
+
+#sendMessage {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #19C37D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shadow-button {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.shadow-button:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.shadow-button:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+}
+
+.resizer {
+    width: 5px;
+    background-color: #565869;
+    cursor: col-resize;
+}
+
+#sidebarResizer {
+    cursor: col-resize;
+}
+
+#inputResizer {
+    height: 5px;
+    cursor: row-resize;
+}
+
+#sidebar {
+    min-width: 200px;
+    max-width: 50%;
+}
+
+#inputArea {
+    min-height: 50px;
+    max-height: 50%;
+}
+
+/* 现有的CSS样式保持不变 */
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column;
+        height: 100vh; /* 使用视口高度 */
+    }
+
+    #sidebar {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 40vh; /* 增加侧边栏的最大高度 */
+        overflow-y: auto;
+    }
+
+    #sidebarResizer {
+        display: none;
+    }
+
+    #chatMain {
+        width: 100%;
+        height: 60vh; /* 剩余高度给主聊天区域 */
+        display: flex;
+        flex-direction: column;
+    }
+
+    #chatContent {
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
+    #inputArea {
+        flex-direction: row; /* 保持输入区域为水平布局 */
+        padding: 10px;
+    }
+
+    #userInput {
+        width: calc(100% - 70px); /* 减去发送按钮的宽度 */
+        margin-bottom: 0;
+    }
+
+    #sendMessage {
+        width: 60px;
+        margin-left: 10px;
+    }
+
+    .message {
+        flex-direction: row; /* 保持消息为水平布局 */
+    }
+
+    .message .avatar {
+        margin-bottom: 0;
+        margin-right: 10px;
+    }
+
+    /* 调整头部标题 */
+    #chatMain header h1 {
+        font-size: 1.5rem;
+        margin: 0;
+        padding: 10px 0;
+    }
+}
+
+/* 添加以下样式以改善整体布局 */
+body, html {
+    overflow: hidden; /* 防止整页滚动 */
+}
+
+#chatList {
+    overflow-y: auto;
+}
+
+#chatContent {
+    overflow-y: auto;
+}
+
+/* 调整输入框样式 */
+#userInput {
+    min-height: 40px;
+    max-height: 120px; /* 限制最大高度 */
+    overflow-y: auto;
+}
+
+/* 添加一些过渡效果使布局变化更平滑 */
+.chat-container, #sidebar, #chatMain, #inputArea {
+    transition: all 0.3s ease;
+}
+
+/* 调整基础字体大小 */
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* 使用相对单位 */
+body {
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+/* 调整按钮和输入框大小 */
+button, input, textarea {
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+/* 确保内容不会溢出容器 */
+.chat-container, #sidebar, #chatMain, #chatContent, #inputArea {
+    overflow: hidden;
+}
+
+/* 添加一些通用的响式样式 */
+* {
+    box-sizing: border-box;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 修改 #sidebar 样式 */
+#sidebar {
+    width: 260px;
+    background-color: #202123;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* 确保侧边栏占满整个高度 */
+}
+
+/* 修改 #chatList 样式 */
+#chatList {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: calc(100% - 60px); /* 减去新建对话按钮的高度 */
+}
+
+/* 在移动设备上的样式调整 */
+@media (max-width: 768px) {
+    #sidebar {
+        max-height: 40vh;
+        width: 100%;
+    }
+
+    #chatList {
+        max-height: calc(40vh - 60px); /* 调整为侧边栏高度减去新建对话按钮的高度 */
+    }
+}
+
+/* 其他样式保持不变 */
